@@ -45,14 +45,15 @@ def write_exr_image(file_path, image_data):
     out.close()
 
 # Function to convert linear RGB to ICtCp and return PQ values
-def linear_rgb_to_ictcp(rgb, mode='HDR', scaling_factor=1):
+def rgbInput_to_ictcp(rgb, mode='HDR', scaling_factor=1):
     if mode.upper() == 'HDR':
         # Ensure the RGB values are within [0, 1]
-        linear_rgb_clipped = np.clip(rgb, 0.0, 1.0)
-        # Apply the Perceptual Quantizer (PQ) OETF
-        pq_rgb = linear_rgb_clipped
+        pq_rgb = np.clip(rgb, 0.0, 1.0)
+        # pq_rgb = pq
+        # Invert the Perceptual Quantizer (PQ) OETF
+        linear_rgb = colour.models.eotf_BT2100_PQ(pq_rgb)
         # Convert RGB to ICtCp using Rec.2100 PQ method
-        ictcp = colour.RGB_to_ICtCp(pq_rgb, method='ITU-R BT.2100-1 PQ')
+        ictcp = colour.RGB_to_ICtCp(linear_rgb, method='ITU-R BT.2100-2 PQ')
     elif mode.upper() == 'SDR':
         # Undo gamma 2.4 encoding to get linear RGB
         linear_rgb = colour.models.eotf_BT1886(rgb)
@@ -74,7 +75,7 @@ def linear_rgb_to_ictcp(rgb, mode='HDR', scaling_factor=1):
         # Apply PQ OETF to simulate HDR encoding
         pq_rgb = colour.models.eotf_inverse_BT2100_PQ(linear_rec2020_rgb_scaled)
         # Convert to ICtCp
-        ictcp = colour.RGB_to_ICtCp(pq_rgb, method='ITU-R BT.2100-1 PQ')
+        ictcp = colour.RGB_to_ICtCp(linear_rec2020_rgb_scaled, method='ITU-R BT.2100-2 PQ')
     else:
         raise ValueError("Mode must be 'SDR' or 'HDR'")
 
@@ -129,8 +130,8 @@ def main():
     image2_rgb = image2[:, :, :3]
 
     # Convert images to ICtCp color space and get PQ values
-    ictcp1, pq_rgb1 = linear_rgb_to_ictcp(image1_rgb, mode=mode, scaling_factor=scaling_factor)
-    ictcp2, pq_rgb2 = linear_rgb_to_ictcp(image2_rgb, mode=mode, scaling_factor=scaling_factor)
+    ictcp1, pq_rgb1 = rgbInput_to_ictcp(image1_rgb, mode=mode, scaling_factor=scaling_factor)
+    ictcp2, pq_rgb2 = rgbInput_to_ictcp(image2_rgb, mode=mode, scaling_factor=scaling_factor)
 
     # Optional: Export PQ values before ICtCp conversion
     if pq_export_path:
