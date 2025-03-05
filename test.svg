@@ -1,0 +1,115 @@
+<svg width="1200" height="1600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .node { fill: #f0f0f0; stroke: #333; stroke-width: 2; }
+    .decision { fill: #ffd700; stroke: #333; stroke-width: 2; }
+    .text { font: 12px sans-serif; text-anchor: middle; }
+    .line { stroke: #333; stroke-width: 2; }
+    .label { font: 10px sans-serif; }
+  </style>
+
+  <!-- Start -->
+  <rect x="500" y="10" width="200" height="40" class="node" />
+  <text x="600" y="35" class="text">Start: Get Filename</text>
+
+  <!-- Filename Check -->
+  <polygon points="600,100 650,80 700,100 650,120" class="decision" />
+  <text x="650" y="105" class="text">FILENAME like origres?</text>
+  <line x1="650" y1="120" x2="650" y2="160" class="line" />
+  <text x="670" y="140" class="label">No</text>
+  <line x1="700" y1="100" x2="750" y2="100" class="line" />
+  <text x="725" y="90" class="label">Yes</text>
+  <rect x="750" y="80" width="150" height="40" class="node" />
+  <text x="825" y="105" class="text">Pass Through</text>
+
+  <!-- Basename Check 1 -->
+  <polygon points="600,180 650,160 700,180 650,200" class="decision" />
+  <text x="650" y="185" class="text">BASENAME like origres?</text>
+  <line x1="650" y1="200" x2="650" y2="240" class="line" />
+  <text x="670" y="220" class="label">No</text>
+  <line x1="700" y1="180" x2="750" y2="180" class="line" />
+  <text x="725" y="170" class="label">Yes</text>
+  <rect x="750" y="160" width="150" height="40" class="node" />
+  <text x="825" y="185" class="text">Pass Through</text>
+
+  <!-- Basename Check 2 -->
+  <polygon points="600,260 650,240 700,260 650,280" class="decision" />
+  <text x="650" y="265" class="text">BASENAME like witcam?</text>
+  <line x1="650" y1="280" x2="650" y2="320" class="line" />
+  <text x="670" y="300" class="label">No</text>
+  <line x1="700" y1="260" x2="750" y2="260" class="line" />
+  <text x="725" y="250" class="label">Yes</text>
+  <rect x="750" y="240" width="150" height="40" class="node" />
+  <text x="825" y="265" class="text">Pass Through</text>
+
+  <!-- Width Check -->
+  <polygon points="600,340 650,320 700,340 650,360" class="decision" />
+  <text x="650" y="345" class="text">Width = ?</text>
+  <line x1="650" y1="360" x2="650" y2="400" class="line" />
+
+  <!-- Width 4608 -->
+  <line x1="650" y1="400" x2="500" y2="450" class="line" />
+  <text x="575" y="430" class="label">4608</text>
+  <polygon points="450,470 500,450 550,470 500,490" class="decision" />
+  <text x="500" y="475" class="text">Height = 3164?</text>
+  <line x1="550" y1="470" x2="600" y2="470" class="line" />
+  <text x="575" y="460" class="label">Yes</text>
+  <rect x="600" y="450" width="200" height="60" class="node" />
+  <text x="700" y="480" class="text">Alexa 35 OpenGate</text>
+
+  <!-- Width 3840 -->
+  <line x1="650" y1="400" x2="650" y2="550" class="line" />
+  <text x="670" y="475" class="label">3840</text>
+  <polygon points="600,570 650,550 700,570 650,590" class="decision" />
+  <text x="650" y="575" class="text">Height = ?</text>
+  <line x1="700" y1="570" x2="750" y2="570" class="line" />
+  <text x="725" y="560" class="label">2160</text>
+  <rect x="750" y="550" width="150" height="40" class="node" />
+  <text x="825" y="575" class="text">Sony a7iii UHD</text>
+  <line x1="650" y1="590" x2="650" y2="630" class="line" />
+  <text x="670" y="610" class="label">2032</text>
+  <rect x="600" y="630" width="200" height="40" class="node" />
+  <text x="700" y="655" class="text">Blackmagic Pyxis 6K</text>
+
+  <!-- Width 6144 -->
+  <line x1="650" y1="400" x2="800" y2="700" class="line" />
+  <text x="725" y="550" class="label">6144</text>
+  <polygon points="750,720 800,700 850,720 800,740" class="decision" />
+  <text x="800" y="725" class="text">Height = 3240?</text>
+  <line x1="850" y1="720" x2="900" y2="720" class="line" />
+  <text x="875" y="710" class="label">Yes</text>
+  <rect x="900" y="700" width="200" height="80" class="node" />
+  <text x="1000" y="740" class="text">RED Komodo-X 6K</text>
+
+  <!-- Width 4096 -->
+  <line x1="650" y1="400" x2="400" y2="800" class="line" />
+  <text x="525" y="600" class="label">4096</text>
+  <polygon points="350,820 400,800 450,820 400,840" class="decision" />
+  <text x="400" y="825" class="text">Height = ?</text>
+  <line x1="450" y1="820" x2="500" y2="820" class="line" />
+  <text x="475" y="810" class="label">2304</text>
+  <polygon points="500,820 550,800 600,820 550,840" class="decision" />
+  <text x="550" y="825" class="text">Phantom Format?</text>
+  <line x1="600" y1="820" x2="650" y2="820" class="line" />
+  <text x="625" y="810" class="label">Yes</text>
+  <rect x="650" y="800" width="150" height="40" class="node" />
+  <text x="725" y="825" class="text">Phantom Flex 4K</text>
+  <line x1="550" y1="840" x2="550" y2="880" class="line" />
+  <text x="570" y="860" class="label">No</text>
+  <rect x="500" y="880" width="150" height="40" class="node" />
+  <text x="575" y="905" class="text">Alexa 35 4K</text>
+
+  <!-- Width 8192 -->
+  <line x1="650" y1="400" x2="800" y2="950" class="line" />
+  <text x="725" y="675" class="label">8192</text>
+  <polygon points="750,970 800,950 850,970 800,990" class="decision" />
+  <text x="800" y="975" class="text">Height = 4320?</text>
+  <line x1="850" y1="970" x2="900" y2="970" class="line" />
+  <text x="875" y="960" class="label">Yes</text>
+  <rect x="900" y="950" width="200" height="80" class="node" />
+  <text x="1000" y="990" class="text">DJI Ronin 4D 8K</text>
+
+  <!-- End -->
+  <rect x="500" y="1500" width="200" height="40" class="node" />
+  <text x="600" y="1525" class="text">End</text>
+  <line x1="650" y1="1480" x2="650" y2="1500" class="line" />
+</svg>

@@ -70,28 +70,31 @@ def compute_image_statistics(delta_e):
         'p95': float(np.percentile(delta_e, 95)),
     }
 
-def add_stats_to_metadata(output_path, stats):
+def add_stats_to_metadata(output_path, stats, ocio_241_path=None, ocio_a2o_path=None):
     inp = oiio.ImageInput.open(output_path)
     spec = inp.spec()
     inp.close()
     for key, value in stats.items():
         spec.attribute(f'DeltaE_{key}', value)
+    if ocio_241_path:
+        spec.attribute("OCIO_Binary_241", ocio_241_path)
+    if ocio_a2o_path:
+        spec.attribute("OCIO_Binary_a2o", ocio_a2o_path)
     img = read_exr_image(output_path)
     write_exr_image(output_path, img, spec)
 
-def overlay_stats_text(image_data, stats, image1_name, image2_name):
-    # Create a blank float mask for text overlay (same shape as image_data)
+def overlay_stats_text(image_data, stats, image1_name, image2_name, ocio_241_binary=None, ocio_a2o_binary=None):
     height, width = image_data.shape
     text_mask = np.zeros((height, width), dtype=np.float32)
     
-    # Create a blank 8-bit image for PIL text rendering
     img_pil = Image.fromarray(np.zeros((height, width), dtype=np.uint8), 'L')
     draw = ImageDraw.Draw(img_pil)
     
-    # Define stats text, including input filenames
     stats_text = [
         f"Input 1: {image1_name}",
+        f"OCIO Binary 1: {ocio_241_binary if ocio_241_binary else 'Unknown'}",
         f"Input 2: {image2_name}",
+        f"OCIO Binary 2: {ocio_a2o_binary if ocio_a2o_binary else 'Unknown'}",
         f"Mean ΔE: {stats['mean']:.2f}",
         f"Median ΔE: {stats['median']:.2f}",
         f"Std Dev: {stats['std_dev']:.2f}",
@@ -99,29 +102,23 @@ def overlay_stats_text(image_data, stats, image1_name, image2_name):
         f"Range: [{stats['min']:.2f}, {stats['max']:.2f}]"
     ]
     
-    # Draw text on the blank image
     try:
-        font = ImageFont.truetype("Arial.ttf", 16)  # Adjust size or font as needed
+        font = ImageFont.truetype("Arial.ttf", 16)
     except:
-        font = ImageFont.load_default()  # Fallback to default font
+        font = ImageFont.load_default()
     
     y_position = 10
     for text in stats_text:
         draw.text((10, y_position), text, fill=255, font=font)
         y_position += 25
     
-    # Convert to float mask (0 or 1 where text is)
-    text_mask = (np.array(img_pil, dtype=np.float32) / 255.0 > 0.5).astype(np.float32)  # Binary mask
+    text_mask = (np.array(img_pil, dtype=np.float32) / 255.0 > 0.5).astype(np.float32)
+    text_value = 1.0
     
-    # Use a fixed value for text brightness
-    text_value = 1.0  # Fixed value for text, as per your change
-    
-    # Composite: keep original delta_e where text_mask is 0, use text_value where 1
     output_data = np.where(text_mask == 1, text_value, image_data)
-    
     return output_data
 
-def compare_images(image1_path, image2_path, output_dir, mode='HDR', scaling_factor=0.01):
+def compare_images(image1_path, image2_path, output_dir, mode='HDR', scaling_factor=0.01, ocio_241_path=None, ocio_a2o_path=None):
     image1 = read_exr_image(image1_path)
     image2 = read_exr_image(image2_path)
     
@@ -146,14 +143,36 @@ def compare_images(image1_path, image2_path, output_dir, mode='HDR', scaling_fac
     for key, value in stats.items():
         print(f"{key}: {value:.2f}")
     
+    # Read OCIO_Binary metadata from input EXRs
+    ocio_241_binary = None
+    ocio_a2o_binary = None
+    try:
+        img_input_241 = oiio.ImageInput.open(image1_path)
+        spec_241 = img_input_241.spec()
+        ocio_241_binary = spec_241.getattribute("OCIO_Binary")
+        img_input_241.close()
+    except:
+        ocio_241_binary = ocio_241_path  # Fallback to passed path if metadata not found
+    
+    try:
+        img_input_a2o = oiio.ImageInput.open(image2_path)
+        spec_a2o = img_input_a2o.spec()
+        ocio_a2o_binary = spec_a2o.getattribute("OCIO_Binary")
+        img_input_a2o.close()
+    except:
+        ocio_a2o_binary = ocio_a2o_path  # Fallback to passed path if metadata not found
+    
     base_name = os.path.basename(image1_path).rsplit('_OCIO241', 1)[0]
     frame_num = os.path.basename(image1_path).split('.')[-2]
     heatmap_output_path = os.path.join(output_dir, f"{base_name}_DeltaITP.{frame_num}.exr")
     
-    # Overlay text with filenames
-    delta_e_with_text = overlay_stats_text(delta_e, stats, os.path.basename(image1_path), os.path.basename(image2_path))
+    delta_e_with_text = overlay_stats_text(
+        delta_e, stats, 
+        os.path.basename(image1_path), os.path.basename(image2_path),
+        ocio_241_binary, ocio_a2o_binary
+    )
     write_exr_image(heatmap_output_path, delta_e_with_text)
-    add_stats_to_metadata(heatmap_output_path, stats)
+    add_stats_to_metadata(heatmap_output_path, stats, ocio_241_path, ocio_a2o_path)
     print(f"Delta E heatmap with text saved to {heatmap_output_path}")
 
 def main():

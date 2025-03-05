@@ -1,0 +1,835 @@
+#! /Applications/Nuke15.1v1/Nuke15.1v1.app/Contents/MacOS/libnuke-15.1.1.dylib -nx
+version 15.1 v1
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="25" w="2560" h="1462" maximized="1" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="1897" stretch="1"/>
+            <splitter orientation="2">
+                <split size="847"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="595"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                    <page id="DAG.2"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.backgroundrenderview.1"/>
+                <page id="Scenegraph.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /Users/afry/GitHub/outputTransformEvalTool/nuke/comparison_v001.nk
+ frame 33
+ last_frame 80
+ lock_range true
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ OCIO_config custom
+ customOCIOConfigPath /Users/afry/Documents/GitHub/OpenColorIO-Configs/aces_1.2/config.ocio
+ workingSpaceLUT linear
+ monitorLut sRGB
+ monitorOutLUT rec709
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec709-D65_100nit_in_Rec709-D65_BT1886_OCIO241_DeltaITP.0002.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read1
+ xpos -605
+ ypos -133
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec709-D65_100nit_in_Rec709-D65_BT1886_OCIO241.0002.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read3
+ xpos -773
+ ypos -134
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec709-D65_100nit_in_Rec709-D65_BT1886_OCIO2a2o.0002.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read2
+ xpos -925
+ ypos -129
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec1886_Rec709_Display_ACES2.0_SDR_100nits_Rec709_OCIO241.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ version 1
+ name Read5
+ xpos -1087
+ ypos 22
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec1886_Rec709_Display_ACES2.0_SDR_100nits_Rec709_OCIOa2o.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ version 1
+ name Read4
+ xpos -612
+ ypos 25
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec1886_Rec709_Display_ACES2.0_SDR_100nits_Rec709_DeltaITP.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ version 1
+ name Read6
+ xpos -172
+ ypos 22
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_500_nits_P3_D65_DeltaITP.0080.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read10
+ xpos -39
+ ypos 155
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___SDR_100_nits_Rec709_DeltaITP.0080.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read11
+ xpos 70
+ ypos 155
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_1000_nits_P3_D65_OCIOa2o.0080.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read12
+ xpos -779
+ ypos 218
+}
+Group {
+ name PQ_to_DisplayP1
+ xpos -779
+ ypos 370
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_2000_nits_P3_D65_DeltaITP.0080.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read8
+ xpos -263
+ ypos 174
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_2000_nits_P3_D65_DeltaITP.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read16
+ xpos 257
+ ypos 827
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_1000_nits_P3_D65_OCIO241.0080.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read13
+ xpos -572
+ ypos 215
+}
+Group {
+ name PQ_to_DisplayP3
+ xpos -572
+ ypos 359
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_2000_nits_P3_D65_OCIOa2o.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read21
+ xpos 1252
+ ypos 819
+}
+Group {
+ name PQ_to_DisplayP10
+ xpos 1252
+ ypos 899
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_2000_nits_P3_D65_OCIO241.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read22
+ xpos 764
+ ypos 823
+}
+Group {
+ name PQ_to_DisplayP9
+ xpos 764
+ ypos 903
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___SDR_100_nits_Rec709_DeltaITP.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read18
+ xpos 264
+ ypos 329
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_4000_nits_P3_D65_DeltaITP.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read14
+ xpos 250
+ ypos 1011
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_4000_nits_P3_D65_OCIOa2o.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read20
+ xpos 1251
+ ypos 1000
+}
+Group {
+ name PQ_to_DisplayP12
+ xpos 1251
+ ypos 1080
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_1000_nits_P3_D65_DeltaITP.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read15
+ xpos 262
+ ypos 658
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_1000_nits_P3_D65_OCIO241.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read23
+ xpos 767
+ ypos 652
+}
+Group {
+ name PQ_to_DisplayP7
+ xpos 767
+ ypos 732
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_1000_nits_P3_D65_OCIOa2o.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read24
+ xpos 1251
+ ypos 645
+}
+Group {
+ name PQ_to_DisplayP8
+ xpos 1251
+ ypos 725
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_4000_nits_P3_D65_DeltaITP.0080.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read7
+ xpos -374
+ ypos 95
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_1000_nits_P3_D65_DeltaITP.0080.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ origset true
+ name Read9
+ xpos -320
+ ypos 153
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_500_nits_P3_D65_OCIO241.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read26
+ xpos 763
+ ypos 476
+}
+Group {
+ name PQ_to_DisplayP5
+ xpos 763
+ ypos 556
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_500_nits_P3_D65_DeltaITP.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read17
+ xpos 266
+ ypos 486
+}
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_4000_nits_P3_D65_OCIO241.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read19
+ xpos 755
+ ypos 1004
+}
+Group {
+ name PQ_to_DisplayP11
+ xpos 755
+ ypos 1084
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+push 0
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___HDR_500_nits_P3_D65_OCIOa2o.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read25
+ xpos 1251
+ ypos 472
+}
+Group {
+ name PQ_to_DisplayP6
+ xpos 1251
+ ypos 552
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___SDR_100_nits_Rec709_OCIOa2o.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read27
+ xpos 1247
+ ypos 318
+}
+Group {
+ name PQ_to_DisplayP4
+ xpos 1247
+ ypos 398
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Read {
+ inputs 0
+ file_type exr
+ file /Users/afry/GitHub/outputTransformEvalTool/images/ACES_OT_VWG_SampleFrames_Rec2100_PQ___Display_ACES_20___SDR_100_nits_Rec709_OCIO241.####.exr
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ last 80
+ origlast 80
+ origset true
+ name Read28
+ xpos 767
+ ypos 320
+}
+Group {
+ name PQ_to_DisplayP2
+ xpos 767
+ ypos 400
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -603
+  ypos 238
+ }
+ Colorspace {
+  colorspace_in st2084
+  primary_in Rec.2020
+  primary_out DCI-P3
+  name Colorspace1
+  xpos -603
+  ypos 278
+ }
+ Multiply {
+  value 0.01
+  name Multiply1
+  xpos -603
+  ypos 302
+ }
+ Colorspace {
+  colorspace_out sRGB
+  name Colorspace2
+  xpos -603
+  ypos 334
+ }
+ Output {
+  name Output1
+  xpos -603
+  ypos 434
+ }
+end_group
+Viewer {
+ inputs 5
+ frame 33
+ frame_range 1-80
+ input_number 1
+ colour_sample_bbox {0.7989583611 -0.03541666642 0.8000000119 -0.03437500075}
+ samplepoints {{-0.7854166627 0.1489583403}
+   }
+ gl_buffer_depth half-float
+ viewerProcess None
+ monitorOutNDISenderName "Nuke - untitled - Viewer1"
+ monitorOutOutputTransform rec709
+ name Viewer1
+ selected true
+ xpos -44
+ ypos -44
+}
